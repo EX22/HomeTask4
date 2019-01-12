@@ -14,17 +14,17 @@ public class Main {
     public static void main(String[] args) {
         try {
 
-            /*DataReader dataReader = new DataReader();
+            DataReader dataReader = new DataReader();
             InputStream inputStream = Main.class.getResourceAsStream(FILE_PATH);
             ArrayList<String> arrayList = dataReader.read(inputStream);
 
             for (String s : arrayList) {
                 System.out.println(s);
-            }*/
+            }
 
-            ToyFactory toyFactory = new ToyFactory();
-            Toy toy = toyFactory.createToy("doll, white, LARGE, fiRSt, eco-plastic, 44.4, no_Voice, MALE, Ken");
-            System.out.println(toy.toString());
+            /*ToyFactory toyFactory = new ToyFactory();
+            Toy toy = toyFactory.createToy("doll, white, LARGE, fiRSt, eco-plastic, 44.4, no_Voice, MALE, Ken, 34");
+            System.out.println(toy.toString());*/
 
             /*String toyLine = "Car, red, medium, third, metal, 100, teslaP100D, 1.30";
             String[] props = toyLine.split(",");
