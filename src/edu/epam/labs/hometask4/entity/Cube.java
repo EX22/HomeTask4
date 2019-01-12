@@ -1,5 +1,7 @@
 package edu.epam.labs.hometask4.entity;
 
+import java.util.Objects;
+
 public class Cube extends Toy {
 
     private int length;
@@ -58,5 +60,32 @@ public class Cube extends Toy {
 
     public void setWeight(double weight) {
         this.weight = weight;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Cube)) return false;
+        if (!super.equals(o)) return false;
+        Cube cube = (Cube) o;
+        return getLength() == cube.getLength() &&
+                getWidth() == cube.getWidth() &&
+                getHeight() == cube.getHeight() &&
+                Double.compare(cube.getWeight(), getWeight()) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getLength(), getWidth(), getHeight(), getWeight());
+    }
+
+    @Override
+    public String toString() {
+        return "Cube{" +
+                "length=" + length +
+                ", width=" + width +
+                ", height=" + height +
+                ", weight=" + weight +
+                "} " + super.toString();
     }
 }

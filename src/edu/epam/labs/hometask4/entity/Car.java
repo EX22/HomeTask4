@@ -1,5 +1,7 @@
 package edu.epam.labs.hometask4.entity;
 
+import java.util.Objects;
+
 public class Car extends Toy {
 
     private String model;
@@ -40,5 +42,28 @@ public class Car extends Toy {
 
     public void setScale(double scale) {
         this.scale = scale;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Car)) return false;
+        if (!super.equals(o)) return false;
+        Car car = (Car) o;
+        return Double.compare(car.getScale(), getScale()) == 0 &&
+                getModel().equals(car.getModel());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getModel(), getScale());
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "model='" + model + '\'' +
+                ", scale=" + scale +
+                "} " + super.toString();
     }
 }

@@ -4,6 +4,7 @@ public enum AgeGroup {
 
     FIRST,
     SECOND,
-    THIRD
+    THIRD;
+
 
 }

@@ -1,6 +1,8 @@
 package edu.epam.labs.hometask4.entity;
 
-public abstract class Toy {
+import java.util.Objects;
+
+public class Toy {
 
     private String color;
     private ToySize toySize;
@@ -16,7 +18,6 @@ public abstract class Toy {
         this.material = material;
         this.price = price;
     }
-
 
 
     public String getColor() {
@@ -59,5 +60,31 @@ public abstract class Toy {
         this.material = material;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Toy)) return false;
+        Toy toy = (Toy) o;
+        return Double.compare(toy.getPrice(), getPrice()) == 0 &&
+                getColor().equals(toy.getColor()) &&
+                getToySize() == toy.getToySize() &&
+                getAgeGroup() == toy.getAgeGroup() &&
+                getMaterial().equals(toy.getMaterial());
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getColor(), getToySize(), getAgeGroup(), getMaterial(), getPrice());
+    }
+
+    @Override
+    public String toString() {
+        return "Toy{" +
+                "color='" + color + '\'' +
+                ", toySize=" + toySize +
+                ", ageGroup=" + ageGroup +
+                ", material='" + material + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }
