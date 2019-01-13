@@ -24,16 +24,16 @@ public class Main {
         try {
 
             //Data reader test test
-            DataReader dataReader = new DataReader();
+            /*DataReader dataReader = new DataReader();
             InputStream inputStream = Main.class.getResourceAsStream(EMPTY_FILE);
             ArrayList<String> arrayList = dataReader.read(inputStream);
 
             for (String s : arrayList) {
                 System.out.println(s);
-            }
+            }*/
 
             //Room factory test test
-            /*DataReader dataReader = new DataReader();
+            DataReader dataReader = new DataReader();
             InputStream inputStream = DataReader.class.getResourceAsStream(EMPTY_FILE);
             ArrayList<String> list = dataReader.read(inputStream);
             ToyFactory toyFactory = new ToyFactory();
@@ -54,20 +54,19 @@ public class Main {
             RoomConfig roomConfig = new RoomConfig(ageGroups, 345.6);
             Room room = roomFactory.createRoom(roomConfig);
             ArrayList<Toy> testToys = room.getToyArrayList();
-            *//*double budgetTest = 0;
+            double budgetTest = 0;
             for (Toy t : testToys) {
                 budgetTest += t.getPrice();
             }
-            System.out.println(budgetTest);*//*
+            System.out.println(budgetTest);
             for (Toy t : testToys) {
                 System.out.println(t);
             }
-            *//*for (Toy t : testToys) {
+            for (Toy t : testToys) {
                 if (t.getAgeGroup().equals(AgeGroup.THIRD) || t.getAgeGroup().equals(AgeGroup.SECOND)) {
                     System.out.println("match");
                 }
-            }*//*
-*/
+            }
 
 
             /*ArrayList<Toy > testToys = new ArrayList<>();

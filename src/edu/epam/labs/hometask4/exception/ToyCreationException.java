@@ -5,4 +5,8 @@ public class ToyCreationException extends Exception {
     public ToyCreationException(String message){
         super(message);
     }
+
+    public ToyCreationException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

@@ -3,7 +3,10 @@ package edu.epam.labs.hometask4.logic;
 //Methods of sorting and searching toys.
 
 import edu.epam.labs.hometask4.entity.AgeGroup;
+import edu.epam.labs.hometask4.entity.RoomConfig;
 import edu.epam.labs.hometask4.entity.Toy;
+import edu.epam.labs.hometask4.entity.ToySize;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -12,11 +15,16 @@ import java.util.stream.Collectors;
 
 public class RoomService {
 
-    public ArrayList<Toy> generateToys(Set<AgeGroup> ageGroups, double budget, ArrayList<Toy> toysInStock) {
+    private static final Logger logger = Logger.getLogger(RoomService.class);
+
+    public ArrayList<Toy> generateToys(RoomConfig roomConfig, ArrayList<Toy> toysInStock) {
+
+
 
         //1.search toys according to age group
-        ArrayList<Toy> ageGroupToys = searchToys(toysInStock, ageGroups);
+        ArrayList<Toy> ageGroupToys = searchToys(toysInStock, roomConfig.getAgeGroups());
         ArrayList<Toy> resultToyList = new ArrayList<>();
+        double budget = roomConfig.getCommonBudget();
         while (budget > 0) {
 
             //2.search toys according to budget
@@ -69,7 +77,7 @@ public class RoomService {
         /*ArrayList<Toy> resultToyBudget = new ArrayList<>();
         for (Toy t: source){
             if (t.getPrice() <= budget){
-                resultToyBudget.add(t);
+                resultToyBudget.add(t);,
             }
         }
         return resultToyBudget;*/
@@ -77,6 +85,13 @@ public class RoomService {
 
         return source.stream().
                 filter(t -> t.getPrice() <= budget).
+                collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public ArrayList<Toy> searchToys(ArrayList<Toy> source, double budget, ToySize toySize) {
+
+        return source.stream().
+                filter(t -> t.getPrice() <= budget && t.getToySize().equals(toySize)).
                 collect(Collectors.toCollection(ArrayList::new));
     }
 }

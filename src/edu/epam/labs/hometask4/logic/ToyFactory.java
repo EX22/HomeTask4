@@ -10,7 +10,22 @@ import java.util.ArrayList;
 
 public class ToyFactory {
 
-    public static final Logger logger = Logger.getLogger(ToyFactory.class);
+    private static final Logger logger = Logger.getLogger(ToyFactory.class);
+
+    //TODO: This method need to be clarified.
+    public ArrayList<Toy> createToysList(ArrayList<String> toyLines) {
+
+        ArrayList<Toy> toysList = new ArrayList<>();
+        for (String s : toyLines) {
+            try {
+                toysList.addAll(createToy(s));
+            } catch (ToyCreationException e) {
+                logger.warn("Ignoring line " + s);
+            }
+
+        }
+        return toysList;
+    }
 
     public ArrayList<Toy> createToy(String toyLine) throws ToyCreationException {
 
@@ -22,14 +37,16 @@ public class ToyFactory {
                 props[j] = props[j].trim();
             }
             if (props.length < 2) {
-                throw new ToyCreationException("Les than two properties in line for toy creation: " + toyLine);
+                throw new ToyCreationException("Less than two properties in line for toy creation: " + toyLine);
             }
             for (int i = 0; i < Integer.parseInt(props[1]); i++) {
                 switch (props[0].toUpperCase()) {
                     case "BALL":
                         if (props.length < 9) {
-                            throw new ToyCreationException("There is not enough elements " +
-                                    "in the line for ball creation: " + toyLine);
+                            String message = "There is not enough elements " +
+                                    "in the line for ball creation: " + toyLine;
+                            logger.warn(message);
+                            throw new ToyCreationException(message);
                         }
                         createdToys.add(new Ball(props[2], ToySize.valueOf(props[3].toUpperCase()),
                                 AgeGroup.valueOf(props[4].toUpperCase()), props[5],
@@ -85,12 +102,18 @@ public class ToyFactory {
                 }
             }
         } catch (NumberFormatException e) {
-            logger.warn("During toys creation an exception occurred ", e);
+            String message = "During toys creation an exception occurred " + toyLine;
+            logger.warn(message, e);
+            throw new ToyCreationException(message, e);
         }
         if (createdToys.size() == 0) {
-            throw new ToyCreationException("There was not created any toys" +
-                    " because of invalid characteristics: " + toyLine);
+            String message = "There were not created any toys" +
+                    " because of invalid characteristics: " + toyLine;
+            logger.warn(message);
+            throw new ToyCreationException(message);
+
         }
+        logger.debug(createdToys.size() + " were produced.");
         return createdToys;
     }
 

@@ -3,6 +3,7 @@ package edu.epam.labs.hometask4.logic;
 import edu.epam.labs.hometask4.comparator.ToyByAgeGroup;
 import edu.epam.labs.hometask4.comparator.ToyByPrice;
 import edu.epam.labs.hometask4.entity.*;
+import edu.epam.labs.hometask4.exception.RoomConfigException;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import static org.testng.Assert.*;
 public class RoomServiceTest {
 
     @Test
-    public void testGenerateToys() {
+    public void testGenerateToys() throws RoomConfigException {
         RoomService roomService = new RoomService();
         Set<AgeGroup> ageGroups = new HashSet<>();
         ageGroups.add(AgeGroup.THIRD);
@@ -47,13 +48,13 @@ public class RoomServiceTest {
         toysInStock.add(new Doll("white", ToySize.LARGE, AgeGroup.FIRST,
                 "eco-plastic", 44.4, DollVoice.NO_VOICE, Gender.MALE, "Ken"));
 
-        ArrayList<Toy> testToys = roomService.generateToys(ageGroups, 438.5, toysInStock);
+        ArrayList<Toy> testToys = roomService.generateToys(new RoomConfig(ageGroups, 438.5), toysInStock);
         assertFalse(testToys.isEmpty());
         double budgetTest = 0;
         for (Toy t : testToys) {
             budgetTest += t.getPrice();
         }
-        assertTrue(438.5 > budgetTest);
+        assertTrue(438.5 >= budgetTest);
         for (Toy t : testToys) {
             assertTrue(t.getAgeGroup().equals(AgeGroup.FIRST) ||
                     t.getAgeGroup().equals(AgeGroup.SECOND) || t.getAgeGroup().equals(AgeGroup.THIRD));
@@ -213,8 +214,9 @@ public class RoomServiceTest {
         RoomService roomService = new RoomService();
         ArrayList<Toy> foundToys = roomService.searchToys(testToys, ageGroups);
         for (Toy t : foundToys) {
-            assertTrue(t.getAgeGroup().equals(AgeGroup.SECOND) || t.getAgeGroup().equals(AgeGroup.FIRST));
+            assertTrue(ageGroups.contains(t.getAgeGroup()));
         }
+
     }
 
 }
