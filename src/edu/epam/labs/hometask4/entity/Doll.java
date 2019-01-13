@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Doll extends Toy {
 
-    private DollVoice voice; // use enum for voice.
+    private DollVoice voice;
     private Gender gender;
     private String name;
 
@@ -30,7 +30,7 @@ public class Doll extends Toy {
         return "Say something";
     }
 
-    public DollVoice isVoice() {
+    public DollVoice getVoice() {
         return voice;
     }
 

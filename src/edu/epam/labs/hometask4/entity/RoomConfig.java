@@ -1,24 +1,25 @@
 package edu.epam.labs.hometask4.entity;
 
 //Age groups, common budget
-//Probably this class should be in other package
+
+import java.util.Set;
 
 public class RoomConfig {
 
-    private AgeGroup configAgeGroup;
+    private Set<AgeGroup> ageGroups;
     private double commonBudget;
 
-    public RoomConfig(AgeGroup configAgeGroup, double commonBudget) {
-        this.configAgeGroup = configAgeGroup;
+    public RoomConfig(Set<AgeGroup> ageGroups, double commonBudget) {
+        this.ageGroups = ageGroups;
         this.commonBudget = commonBudget;
     }
 
-    public AgeGroup getConfigAgeGroup() {
-        return configAgeGroup;
+    public Set<AgeGroup> getAgeGroups() {
+        return ageGroups;
     }
 
-    public void setConfigAgeGroup(AgeGroup configAgeGroup) {
-        this.configAgeGroup = configAgeGroup;
+    public void setAgeGroups(Set<AgeGroup> ageGroups) {
+        this.ageGroups = ageGroups;
     }
 
     public double getCommonBudget() {

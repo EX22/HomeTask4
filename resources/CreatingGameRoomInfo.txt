@@ -1,4 +1,4 @@
-BALL, blue, small, second, plastic, 20.4, 12.3, 0.9, 99
-Car, red, medium, third, metal, 100, teslaP100D, 1.30, 56
-cUBE, GREEN, Large, third, rubber, 79.9, 50, 50, 50, 1.5, 350
-doll, white, LARGE, fiRSt, eco-plastic, 44.4, no_Voice, MALE, Ken, 34
+BALL, 3, blue, small, second, plastic, 20.4, 12.3, 0.9
+Car, 4, red, medium, third, metal, 100, teslaP100D, 1.30
+cUBE, 5, GREEN, Large, third, rubber, 79.9, 50, 50, 50, 1.5
+doll, 2, white, LARGE, fiRSt, eco-plastic, 44.4, no_Voice, MALE, Ken

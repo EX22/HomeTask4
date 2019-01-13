@@ -1,0 +1,20 @@
+First two parameters mean correspondingly, title and amount in stock
+then followed demanded amount of parameters to particular object instantiation.
+Parameters should be separated by comma.
+If there are invalid data in the file game room will not be created.
+
+Ball, 3, blue, small, second, plastic, 20.4, 12.3, 0.9
+(String color, ToySize toySize, AgeGroup ageGroup, String material,
+ double price, double diameter, double resilience)
+
+Car, 4, red, medium, third, metal, 100, teslaP100D, 1.30
+(String color, ToySize toySize, AgeGroup ageGroup, String material,
+ double price, String model, double scale)
+
+Cube, 5, GREEN, Large, third, rubber, 79.9, 50, 50, 50, 1.5
+(String color, ToySize toySize, AgeGroup ageGroup, String material,
+ double price, int length, int width, int height, double weight)
+
+Doll, 2, white, LARGE, fiRSt, eco-plastic, 44.4, no_Voice, MALE, Ken
+(String color, ToySize toySize, AgeGroup ageGroup, String material,
+ double price, DollVoice voice, Gender gender, String name)

@@ -29,6 +29,7 @@ public class RoomService {
             int toyIndex = (int) (Math.random() * budgetToys.size());
             Toy randomToy = budgetToys.get(toyIndex);
             resultToyList.add(randomToy);
+
             //4.decrease budget by the price of the generated toy
             budget -= randomToy.getPrice();
 
