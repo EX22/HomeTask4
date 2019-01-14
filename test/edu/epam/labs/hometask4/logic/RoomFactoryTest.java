@@ -5,6 +5,8 @@ import edu.epam.labs.hometask4.entity.Room;
 import edu.epam.labs.hometask4.entity.RoomConfig;
 import edu.epam.labs.hometask4.entity.Toy;
 import edu.epam.labs.hometask4.exception.DataReaderException;
+import edu.epam.labs.hometask4.exception.RoomConfigException;
+import edu.epam.labs.hometask4.exception.RoomFactoryException;
 import edu.epam.labs.hometask4.exception.ToyCreationException;
 import edu.epam.labs.hometask4.reader.DataReader;
 import org.testng.annotations.Test;
@@ -21,15 +23,14 @@ public class RoomFactoryTest {
     public static final String FILE_PATH = "/CreatingGameRoomInfo.txt";
 
     @Test
-    public void testCreateRoom() throws DataReaderException, ToyCreationException {
+    public void testCreateRoom() throws DataReaderException, ToyCreationException,
+            RoomFactoryException, RoomConfigException {
         DataReader dataReader = new DataReader();
         InputStream inputStream = DataReader.class.getResourceAsStream(FILE_PATH);
         ArrayList<String> list = dataReader.read(inputStream);
         ToyFactory toyFactory = new ToyFactory();
-        ArrayList<Toy> toysInStock = new ArrayList<>();
-        for (String s : list) {
-            toysInStock.addAll(toyFactory.createToy(s));
-        }
+        ArrayList<Toy> toysInStock = toyFactory.createToysList(list);
+
         RoomFactory roomFactory = new RoomFactory(toysInStock);
         Set<AgeGroup> ageGroups = new HashSet<>();
         ageGroups.add(AgeGroup.SECOND);

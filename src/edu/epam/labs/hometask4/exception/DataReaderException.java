@@ -6,4 +6,7 @@ public class DataReaderException extends Exception {
         super(message);
     }
 
+    public DataReaderException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

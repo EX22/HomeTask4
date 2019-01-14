@@ -6,7 +6,10 @@ import edu.epam.labs.hometask4.entity.AgeGroup;
 import edu.epam.labs.hometask4.entity.RoomConfig;
 import edu.epam.labs.hometask4.entity.Toy;
 import edu.epam.labs.hometask4.entity.ToySize;
-import org.apache.log4j.Logger;
+import edu.epam.labs.hometask4.exception.RoomConfigException;
+import edu.epam.labs.hometask4.exception.RoomServiceException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -15,11 +18,23 @@ import java.util.stream.Collectors;
 
 public class RoomService {
 
-    private static final Logger logger = Logger.getLogger(RoomService.class);
+    private static final Logger logger = LogManager.getLogger(RoomService.class);
 
-    public ArrayList<Toy> generateToys(RoomConfig roomConfig, ArrayList<Toy> toysInStock) {
+    public ArrayList<Toy> generateToys(RoomConfig roomConfig, ArrayList<Toy> toysInStock) throws RoomConfigException,
+            RoomServiceException {
 
+        if (roomConfig.getAgeGroups() == null || roomConfig
+                .getAgeGroups().isEmpty() || roomConfig.getCommonBudget() <= 0) {
+            String message = "Invalid room config parameters";
+            logger.warn(message);
+            throw new RoomConfigException(message);
+        }
 
+        if (toysInStock == null || toysInStock.isEmpty()) {
+            String message = "There is no toys in stock.";
+            logger.error(message);
+            throw new RoomServiceException(message);
+        }
 
         //1.search toys according to age group
         ArrayList<Toy> ageGroupToys = searchToys(toysInStock, roomConfig.getAgeGroups());

@@ -4,15 +4,15 @@ package edu.epam.labs.hometask4.logic;
 
 import edu.epam.labs.hometask4.entity.*;
 import edu.epam.labs.hometask4.exception.ToyCreationException;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 
 public class ToyFactory {
 
-    private static final Logger logger = Logger.getLogger(ToyFactory.class);
+    private static final Logger logger = LogManager.getLogger(ToyFactory.class);
 
-    //TODO: This method need to be clarified.
     public ArrayList<Toy> createToysList(ArrayList<String> toyLines) {
 
         ArrayList<Toy> toysList = new ArrayList<>();

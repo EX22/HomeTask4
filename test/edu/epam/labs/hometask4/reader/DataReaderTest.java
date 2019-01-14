@@ -18,7 +18,7 @@ public class DataReaderTest {
 
         DataReader dataReader = new DataReader();
         InputStream inputStream = DataReaderTest.class.getResourceAsStream(FILE_PATH);
-        String expectedLine = "cUBE, GREEN, Large, third, rubber, 79.9, 50, 50, 50, 1.5, 350";
+        String expectedLine = "cUBE, 5, GREEN, Large, third, rubber, 79.9, 50, 50, 50, 1.5";
         ArrayList<String> actualList = dataReader.read(inputStream);
         assertEquals(actualList.get(2), expectedLine);
 
@@ -30,4 +30,6 @@ public class DataReaderTest {
         InputStream inputStream =DataReaderTest.class.getResourceAsStream(WRONG_FILE_PATH);
         dataReader.read(inputStream);
     }
+
+
 }

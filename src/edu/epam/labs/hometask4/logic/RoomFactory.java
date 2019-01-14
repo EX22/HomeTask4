@@ -5,14 +5,17 @@ package edu.epam.labs.hometask4.logic;
 import edu.epam.labs.hometask4.entity.Room;
 import edu.epam.labs.hometask4.entity.RoomConfig;
 import edu.epam.labs.hometask4.entity.Toy;
+import edu.epam.labs.hometask4.exception.RoomConfigException;
 import edu.epam.labs.hometask4.exception.RoomFactoryException;
-import org.apache.log4j.Logger;
+import edu.epam.labs.hometask4.exception.RoomServiceException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 
 public class RoomFactory {
 
-    private static final Logger logger = Logger.getLogger(RoomFactory.class);
+    private static final Logger logger = LogManager.getLogger(RoomFactory.class);
 
     private ArrayList<Toy> toysInStock;
 
@@ -30,7 +33,7 @@ public class RoomFactory {
     }
 
 
-    public Room createRoom(RoomConfig roomConfig) {
+    public Room createRoom(RoomConfig roomConfig) throws RoomConfigException, RoomServiceException {
 
         //1. Get list of toys in stock(defined in constructor)
         //2. Generate list of toys
