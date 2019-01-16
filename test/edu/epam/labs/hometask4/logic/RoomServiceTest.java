@@ -4,6 +4,9 @@ import edu.epam.labs.hometask4.comparator.ToyByAgeGroup;
 import edu.epam.labs.hometask4.comparator.ToyByPrice;
 import edu.epam.labs.hometask4.entity.*;
 import edu.epam.labs.hometask4.exception.RoomConfigException;
+import edu.epam.labs.hometask4.exception.RoomServiceException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -14,8 +17,11 @@ import static org.testng.Assert.*;
 
 public class RoomServiceTest {
 
+    private static final Logger logger = LogManager.getLogger(RoomServiceTest.class);
+
     @Test
-    public void testGenerateToys() throws RoomConfigException {
+    public void testGenerateToys() throws RoomConfigException, RoomServiceException {
+        logger.debug("Test started: ");
         RoomService roomService = new RoomService();
         Set<AgeGroup> ageGroups = new HashSet<>();
         ageGroups.add(AgeGroup.THIRD);
@@ -59,10 +65,12 @@ public class RoomServiceTest {
             assertTrue(t.getAgeGroup().equals(AgeGroup.FIRST) ||
                     t.getAgeGroup().equals(AgeGroup.SECOND) || t.getAgeGroup().equals(AgeGroup.THIRD));
         }
+        logger.debug("List of toys according to given parameters was successfully generated.");
     }
 
     @Test
     public void testSortToys() {
+        logger.debug("Test started: ");
         ArrayList<Toy> testToys = new ArrayList<>();
 
         testToys.add(new Ball("blue", ToySize.MEDIUM, AgeGroup.SECOND,
@@ -95,10 +103,12 @@ public class RoomServiceTest {
         for (int i = 0; i < sortedToys.size() - 1; i++) {
             assertTrue(sortedToys.get(i).getPrice() <= sortedToys.get(i + 1).getPrice());
         }
+        logger.debug("Received list of toys was successfully sorted according to toy's price.");
     }
 
     @Test
     public void testSortToys1() {
+        logger.debug("Test started: ");
         ArrayList<Toy> testToys = new ArrayList<>();
 
         testToys.add(new Ball("blue", ToySize.MEDIUM, AgeGroup.THIRD,
@@ -138,12 +148,14 @@ public class RoomServiceTest {
 
             }
         }
+        logger.debug("Received list of toys was successfully sorted according to toy's price and age group.");
 
 
     }
 
     @Test
     public void testSearchToys() {
+        logger.debug("Test started: ");
         ArrayList<Toy> testToys = new ArrayList<>();
 
         testToys.add(new Ball("blue", ToySize.MEDIUM, AgeGroup.SECOND,
@@ -172,15 +184,17 @@ public class RoomServiceTest {
                 "eco-plastic", 44.4, DollVoice.NO_VOICE, Gender.MALE, "Ken"));
 
         RoomService roomService = new RoomService();
-        ArrayList<Toy> foundToys = roomService.searchToys(testToys, 45.4);
+        double budget = 45.4;
+        ArrayList<Toy> foundToys = roomService.searchToys(testToys, budget);
         for (Toy t : foundToys) {
-            assertTrue(t.getPrice() <= 45.4);
+            assertTrue(t.getPrice() <= budget);
         }
-
+        logger.debug("In received list of toys were found toys according to given budget.");
     }
 
     @Test
     public void testSearchToys1() {
+        logger.debug("Test started: ");
         ArrayList<Toy> testToys = new ArrayList<>();
 
         testToys.add(new Ball("blue", ToySize.MEDIUM, AgeGroup.SECOND,
@@ -216,7 +230,45 @@ public class RoomServiceTest {
         for (Toy t : foundToys) {
             assertTrue(ageGroups.contains(t.getAgeGroup()));
         }
-
+        logger.debug("In received list of toys were found toys according to given age group.");
     }
 
+    @Test
+    public void testSearchToys2() {
+        logger.debug("Test started: ");
+        ArrayList<Toy> testToys = new ArrayList<>();
+
+        testToys.add(new Ball("blue", ToySize.MEDIUM, AgeGroup.SECOND,
+                "plastic", 20.4, 12.3, 0.9));
+        testToys.add(new Car("red", ToySize.MEDIUM, AgeGroup.THIRD,
+                "metal", 100, "teslaP100D", 1.30));
+        testToys.add(new Cube("GREEN", ToySize.LARGE, AgeGroup.THIRD,
+                "rubber", 79.9, 50, 50, 50, 1.5));
+        testToys.add(new Doll("white", ToySize.LARGE, AgeGroup.FIRST,
+                "eco-plastic", 44.4, DollVoice.NO_VOICE, Gender.MALE, "Ken"));
+        testToys.add(new Ball("blue", ToySize.MEDIUM, AgeGroup.SECOND,
+                "plastic", 20.4, 12.3, 0.9));
+        testToys.add(new Car("red", ToySize.MEDIUM, AgeGroup.THIRD,
+                "metal", 100, "teslaP100D", 1.30));
+        testToys.add(new Cube("GREEN", ToySize.LARGE, AgeGroup.THIRD,
+                "rubber", 79.9, 50, 50, 50, 1.5));
+        testToys.add(new Doll("white", ToySize.LARGE, AgeGroup.FIRST,
+                "eco-plastic", 44.4, DollVoice.NO_VOICE, Gender.MALE, "Ken"));
+        testToys.add(new Ball("blue", ToySize.MEDIUM, AgeGroup.SECOND,
+                "plastic", 20.4, 12.3, 0.9));
+        testToys.add(new Car("red", ToySize.MEDIUM, AgeGroup.THIRD,
+                "metal", 100, "teslaP100D", 1.30));
+        testToys.add(new Cube("GREEN", ToySize.LARGE, AgeGroup.THIRD,
+                "rubber", 79.9, 50, 50, 50, 1.5));
+        testToys.add(new Doll("white", ToySize.LARGE, AgeGroup.FIRST,
+                "eco-plastic", 44.4, DollVoice.NO_VOICE, Gender.MALE, "Ken"));
+
+        RoomService roomService = new RoomService();
+        double budget = 78.3;
+        ArrayList<Toy> foundToys = roomService.searchToys(testToys, budget, ToySize.LARGE);
+        for (Toy t : foundToys) {
+            assertTrue(t.getPrice() <= budget && t.getToySize().equals(ToySize.LARGE));
+        }
+        logger.debug("In received list of toys were found toys according to given budget and toy's size.");
+    }
 }

@@ -1,9 +1,10 @@
 package edu.epam.labs.hometask4.entity;
 
-//Age groups, common budget
-
 import java.util.Set;
 
+/**
+ * Contains age groups and common budget parameters for game room creation.
+ */
 public class RoomConfig {
 
     private Set<AgeGroup> ageGroups;
@@ -23,4 +24,11 @@ public class RoomConfig {
         return commonBudget;
     }
 
+    @Override
+    public String toString() {
+        return "RoomConfig{" +
+                "ageGroups=" + ageGroups +
+                ", commonBudget=" + commonBudget +
+                '}';
+    }
 }

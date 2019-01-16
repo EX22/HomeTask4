@@ -1,7 +1,5 @@
 package edu.epam.labs.hometask4.logic;
 
-//Creating toys or generating toys according to budget.
-
 import edu.epam.labs.hometask4.entity.*;
 import edu.epam.labs.hometask4.exception.ToyCreationException;
 import org.apache.logging.log4j.LogManager;
@@ -9,10 +7,19 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 
+/**
+ * Toys creation according to parameters read from file.
+ */
 public class ToyFactory {
 
     private static final Logger logger = LogManager.getLogger(ToyFactory.class);
 
+    /**
+     * Search lines with parameters for toy's creation and creates stock of toys.
+     *
+     * @param toyLines list of lines read from file
+     * @return list of toys in stock.
+     */
     public ArrayList<Toy> createToysList(ArrayList<String> toyLines) {
 
         ArrayList<Toy> toysList = new ArrayList<>();
@@ -27,6 +34,13 @@ public class ToyFactory {
         return toysList;
     }
 
+    /**
+     * Creates toys of same type according to given parameters.
+     *
+     * @param toyLine line with toy's parameters such as title, amount, color etc.
+     * @return list of toys created using given parameters.
+     * @throws ToyCreationException - in case of invalid parameters for toy's creation.
+     */
     public ArrayList<Toy> createToy(String toyLine) throws ToyCreationException {
 
         ArrayList<Toy> createdToys = new ArrayList<>();
@@ -37,14 +51,15 @@ public class ToyFactory {
                 props[j] = props[j].trim();
             }
             if (props.length < 2) {
-                throw new ToyCreationException("Less than two properties in line for toy creation: " + toyLine);
+                String message = "Less than two properties in line for toy creation: " + toyLine;
+                logger.warn(message);
+                throw new ToyCreationException(message);
             }
             for (int i = 0; i < Integer.parseInt(props[1]); i++) {
                 switch (props[0].toUpperCase()) {
                     case "BALL":
                         if (props.length < 9) {
-                            String message = "There is not enough elements " +
-                                    "in the line for ball creation: " + toyLine;
+                            String message = notEnoughParamMsg(props[0].toUpperCase(), toyLine);
                             logger.warn(message);
                             throw new ToyCreationException(message);
                         }
@@ -58,8 +73,9 @@ public class ToyFactory {
 
                     case "CAR":
                         if (props.length < 9) {
-                            throw new ToyCreationException("There is not enough elements " +
-                                    "in the line for car creation: " + toyLine);
+                            String message = notEnoughParamMsg(props[0].toUpperCase(), toyLine);
+                            logger.warn(message);
+                            throw new ToyCreationException(message);
                         }
                         createdToys.add(new Car(props[2], ToySize.valueOf(props[3].toUpperCase()),
                                 AgeGroup.valueOf(props[4].toUpperCase()), props[5],
@@ -70,8 +86,9 @@ public class ToyFactory {
 
                     case "CUBE":
                         if (props.length < 11) {
-                            throw new ToyCreationException("There is not enough elements " +
-                                    "in the line for cube creation: " + toyLine);
+                            String message = notEnoughParamMsg(props[0].toUpperCase(), toyLine);
+                            logger.warn(message);
+                            throw new ToyCreationException(message);
                         }
                         createdToys.add(new Cube(props[2], ToySize.valueOf(props[3].toUpperCase()),
                                 AgeGroup.valueOf(props[4].toUpperCase()), props[5],
@@ -84,8 +101,9 @@ public class ToyFactory {
 
                     case "DOLL":
                         if (props.length < 10) {
-                            throw new ToyCreationException("There is not enough elements " +
-                                    "in the line for doll creation: " + toyLine);
+                            String message = notEnoughParamMsg(props[0].toUpperCase(), toyLine);
+                            logger.warn(message);
+                            throw new ToyCreationException(message);
                         }
                         createdToys.add(new Doll(props[2], ToySize.valueOf(props[3].toUpperCase()),
                                 AgeGroup.valueOf(props[4].toUpperCase()), props[5],
@@ -113,8 +131,13 @@ public class ToyFactory {
             throw new ToyCreationException(message);
 
         }
-        logger.debug(createdToys.size() + " were produced.");
+        logger.debug(createdToys.size() + " toys were produced.");
         return createdToys;
+    }
+
+    public String notEnoughParamMsg(String toyType, String toyLine){
+        return "There are not enough elements " +
+                "in the line for " + toyType + " creation: " + toyLine;
     }
 
 }

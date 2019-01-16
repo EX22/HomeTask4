@@ -2,13 +2,16 @@ package edu.epam.labs.hometask4.entity;
 
 import java.util.Objects;
 
+/**
+ * Entity for storing doll toy with parameters.
+ */
 public class Doll extends Toy {
 
     private DollVoice voice;
     private Gender gender;
     private String name;
 
-    public Doll(String color, ToySize toySize, AgeGroup ageGroup, String material, double price){
+    public Doll(String color, ToySize toySize, AgeGroup ageGroup, String material, double price) {
 
         super(color, toySize, ageGroup, material, price);
         voice = DollVoice.NO_VOICE;
@@ -24,10 +27,6 @@ public class Doll extends Toy {
         this.voice = voice;
         this.gender = gender;
         this.name = name;
-    }
-
-    private String saySomething(){
-        return "Say something";
     }
 
     public DollVoice getVoice() {

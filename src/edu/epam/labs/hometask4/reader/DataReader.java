@@ -9,10 +9,20 @@ import java.io.*;
 import java.util.ArrayList;
 
 
+/**
+ * Reads file from given resource.
+ */
 public class DataReader {
 
     private static final Logger logger = LogManager.getLogger(DataReader.class);
 
+    /**
+     * Reads file from the source.
+     *
+     * @param inputStream input stream to read data from.
+     * @return List of strings.
+     * @throws DataReaderException in case if can not read from input stream for some reason.
+     */
     public ArrayList<String> read(InputStream inputStream) throws DataReaderException {
 
         ArrayList<String> arrayList = new ArrayList<>();

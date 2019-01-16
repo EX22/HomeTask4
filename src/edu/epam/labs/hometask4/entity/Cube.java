@@ -2,6 +2,9 @@ package edu.epam.labs.hometask4.entity;
 
 import java.util.Objects;
 
+/**
+ * Entity for storing cube toy with parameters.
+ */
 public class Cube extends Toy {
 
     private int length;
@@ -9,7 +12,7 @@ public class Cube extends Toy {
     private int height;
     private double weight;
 
-    public Cube(String color, ToySize toySize, AgeGroup ageGroup, String material, double price){
+    public Cube(String color, ToySize toySize, AgeGroup ageGroup, String material, double price) {
 
         super(color, toySize, ageGroup, material, price);
         length = 1;

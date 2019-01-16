@@ -2,12 +2,15 @@ package edu.epam.labs.hometask4.entity;
 
 import java.util.Objects;
 
+/**
+ * Entity for storing car toy with parameters.
+ */
 public class Car extends Toy {
 
     private String model;
     private double scale;
 
-    public Car(String color, ToySize toySize, AgeGroup ageGroup, String material, double price){
+    public Car(String color, ToySize toySize, AgeGroup ageGroup, String material, double price) {
 
         super(color, toySize, ageGroup, material, price);
         model = "Ferrari";
@@ -15,17 +18,12 @@ public class Car extends Toy {
 
     }
 
-
     public Car(String color, ToySize toySize, AgeGroup ageGroup, String material,
                double price, String model, double scale) {
 
         super(color, toySize, ageGroup, material, price);
         this.model = model;
         this.scale = scale;
-    }
-
-    private void toRide(){
-
     }
 
     public String getModel() {

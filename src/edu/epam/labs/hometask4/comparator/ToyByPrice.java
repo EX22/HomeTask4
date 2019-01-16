@@ -4,6 +4,9 @@ import edu.epam.labs.hometask4.entity.Toy;
 
 import java.util.Comparator;
 
+/**
+ * Comparing two objects by price.
+ */
 public class ToyByPrice implements Comparator<Toy> {
 
     @Override

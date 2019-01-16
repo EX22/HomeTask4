@@ -1,7 +1,5 @@
 package edu.epam.labs.hometask4.logic;
 
-//Methods of sorting and searching toys.
-
 import edu.epam.labs.hometask4.entity.AgeGroup;
 import edu.epam.labs.hometask4.entity.RoomConfig;
 import edu.epam.labs.hometask4.entity.Toy;
@@ -16,10 +14,23 @@ import java.util.Comparator;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Generating, sorting and searching toys.
+ */
 public class RoomService {
 
     private static final Logger logger = LogManager.getLogger(RoomService.class);
 
+    /**
+     * Method generates list of toys for game room according to given parameters.
+     *
+     * @param roomConfig  contains age groups and budget parameters necessary for game room creation.
+     * @param toysInStock list of toys that we got in stock.
+     * @return particular list of toys generated from toys we got in stock for particular game room
+     * within demanded age groups and budget.
+     * @throws RoomConfigException  - in case if room configuration's parameters are not valid for room creation.
+     * @throws RoomServiceException - in case if there are no toys in stock.
+     */
     public ArrayList<Toy> generateToys(RoomConfig roomConfig, ArrayList<Toy> toysInStock) throws RoomConfigException,
             RoomServiceException {
 
@@ -31,7 +42,7 @@ public class RoomService {
         }
 
         if (toysInStock == null || toysInStock.isEmpty()) {
-            String message = "There is no toys in stock.";
+            String message = "There are no toys in stock.";
             logger.error(message);
             throw new RoomServiceException(message);
         }
@@ -68,6 +79,13 @@ public class RoomService {
     /*sortToys(resultToyList, new ToyByAgeGroup().thenComparing(new ToyByPrice()));
         resultToyList.sort(new ToyByAgeGroup());*/
 
+    /**
+     * Sort list of toys as it demands.
+     *
+     * @param list       unsorted list of toys from game room.
+     * @param comparator parameter according to that list of toys from game room will be sorted.
+     * @return sorted according to demanded parameter list of toys from game room.
+     */
     public ArrayList<Toy> sortToys(ArrayList<Toy> list, Comparator<Toy> comparator) {
 
         //list.sort(new ToyByAgeGroup().thenComparing(new ToyByPrice()));
@@ -77,6 +95,13 @@ public class RoomService {
         return list;
     }
 
+    /**
+     * Search for toys in the game room within demanded age groups.
+     *
+     * @param source    list of toys from game room where we are going to find toys with needed parameter.
+     * @param ageGroups set of age groups for demanded toys.
+     * @return list of toys with needed age groups parameter.
+     */
     public ArrayList<Toy> searchToys(ArrayList<Toy> source, Set<AgeGroup> ageGroups) {
 
         //Create a Stream from the source
@@ -87,6 +112,13 @@ public class RoomService {
                         collect(Collectors.toCollection(ArrayList::new));
     }
 
+    /**
+     * Search for toys in the game room within demanded budget.
+     *
+     * @param source list of toys from game room where we are going to find toys with needed parameter.
+     * @param budget set of age groups for demanded toys.
+     * @return list of toys within demanded budget parameter.
+     */
     public ArrayList<Toy> searchToys(ArrayList<Toy> source, double budget) {
 
         /*ArrayList<Toy> resultToyBudget = new ArrayList<>();
@@ -103,6 +135,14 @@ public class RoomService {
                 collect(Collectors.toCollection(ArrayList::new));
     }
 
+    /**
+     * Search for toys in the game room within demanded budget and toy size.
+     *
+     * @param source  list of toys from game room where we are going to find toys with needed parameters.
+     * @param budget  amount of money toys price from list need to be.
+     * @param toySize toy size parameters for demanded toys.
+     * @return list of toys within demanded budget and toy size parameters.
+     */
     public ArrayList<Toy> searchToys(ArrayList<Toy> source, double budget, ToySize toySize) {
 
         return source.stream().

@@ -2,12 +2,15 @@ package edu.epam.labs.hometask4.entity;
 
 import java.util.Objects;
 
+/**
+ * Entity for storing ball toy with parameters.
+ */
 public class Ball extends Toy {
 
     private double diameter;
     private double resilience;
 
-    public Ball(String color, ToySize toySize, AgeGroup ageGroup, String material, double price){
+    public Ball(String color, ToySize toySize, AgeGroup ageGroup, String material, double price) {
 
         super(color, toySize, ageGroup, material, price);
         diameter = 1.0;
@@ -23,15 +26,6 @@ public class Ball extends Toy {
         this.resilience = resilience;
     }
 
-
-
-    private void toRoll(){
-        //should be given some impulse to that logic
-    }
-
-    private void toBounce(){
-        //should be given some impulse to that logic
-    }
 
     public double getDiameter() {
         return diameter;

@@ -2,6 +2,9 @@ package edu.epam.labs.hometask4.entity;
 
 import java.util.Objects;
 
+/**
+ * Parent class for all toys, containing common properties.
+ */
 public class Toy {
 
     private String color;

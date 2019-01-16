@@ -1,9 +1,10 @@
 package edu.epam.labs.hometask4.entity;
 
-//Container for toys
-
 import java.util.ArrayList;
 
+/**
+ * Game room, container for toys.
+ */
 public class Room {
 
     private RoomConfig roomConfig;

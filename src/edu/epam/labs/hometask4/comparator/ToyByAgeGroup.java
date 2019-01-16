@@ -5,6 +5,9 @@ import edu.epam.labs.hometask4.entity.Toy;
 
 import java.util.Comparator;
 
+/**
+ * Comparing two objects by age group.
+ */
 public class ToyByAgeGroup implements Comparator<Toy> {
 
     @Override
